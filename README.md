@@ -95,6 +95,6 @@ Once you've installed all prerequisites, enter these commands in the given order
     mkdir build
     cd build
     cmake -DCMAKE_BUILD_TYPE=Release ..
-    make -j 16
+    make -j$(nproc)
 
 When compilation is successfully finished, `build` folder should contain these 3 executables: `SurrealEngine`, `SurrealEditor` and `SurrealDebugger`
