@@ -106,7 +106,7 @@ jobs:
       if: runner.os != 'Windows'
       uses: actions/upload-artifact@v4
       with:
-        path: SurrealEngine_${{ github.sha }}-1.x86_64.deb
+        path: SurrealEngine_${{ github.sha }}-1_amd64.deb
         name: ${{ matrix.config.name }} ${{ matrix.config.build_type }} deb
 
     - name: Upload Package (rpm)
