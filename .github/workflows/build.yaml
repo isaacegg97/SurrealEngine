@@ -76,12 +76,46 @@ jobs:
           strip package/libSurrealVideo.so
         fi
 
-    - name: Upload Package
+    - name: build RPM package
+      uses: kentik/pkg@v1.0.0-rc8
+      with:
+        name: SurrealEngine
+        version: ${{ github.sha }}
+        arch: x86_64
+        format: rpm
+        package: .github/package.yml
+
+    - name: build DEB package
+      uses: kentik/pkg@v1.0.0-rc8
+      with:
+        name: SurrealEngine
+        version: ${{ github.sha }}
+        arch: x86_64
+        format: deb
+        package: .github/package.yml
+
+
+    - name: Upload Package (Windows)
       if: runner.os == 'Windows' || matrix.config.name == 'Linux GCC 12'
       uses: actions/upload-artifact@v4
       with:
         path: build/package
         name: ${{ matrix.config.name }} ${{ matrix.config.build_type }}
+
+    - name: Upload Package (deb)
+      if: runner.os != 'Windows'
+      uses: actions/upload-artifact@v4
+      with:
+        path: SurrealEngine_${{ github.sha }}-1.x86_64.deb
+        name: ${{ matrix.config.name }} ${{ matrix.config.build_type }} deb
+
+    - name: Upload Package (rpm)
+      if: runner.os != 'Windows'
+      uses: actions/upload-artifact@v4
+      with:
+        path: SurrealEngine-${{ github.sha }}-1.x86_64.rpm
+        name: ${{ matrix.config.name }} ${{ matrix.config.build_type }} rpm
+
 
     - name: List Build Directory
       if: always()
@@ -90,7 +124,7 @@ jobs:
         git status
         ls -lR build
 
-  deploy:
+  release:
     name: Update Latest successful build
     runs-on: ubuntu-latest
     needs: build
