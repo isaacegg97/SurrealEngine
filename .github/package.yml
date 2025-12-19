@@ -1,0 +1,26 @@
+meta:
+  description: Surreal Engine An opensource replacement of Unreal Engine 1 & 2
+  vendor: Surreal Engine DevTeam
+  maintainer: Surreal Engine DevTeam
+files:
+  "/usr/bin/surrealeditor":
+    file: build/SurrealEditor
+    mode: "0755"
+    user: "root"
+  "/usr/bin/surrealengine":
+    file: build/SurrealEngine
+    mode: "0755"
+    user: "root"
+  "/usr/lib/libSurrealCommon.a":
+    file: build/libSurrealCommon.a
+    mode: "0644"
+    user: "root"
+  "/usr/lib/libSurrealVideo.so":
+    file: build/libSurrealVideo.so
+    mode: "0644"
+    user: "root"
+  "/usr/share/surrealengine/SurrealEngine.pk3":
+    file: build/SurrealEngine.pk3
+    mode: "0644"
+    user: "root"
+user: root
